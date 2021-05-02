@@ -24,7 +24,7 @@ function AlwaysScrollToBottom() {
 function ChatRoom() {
   const groupIdRef = createRef();
   const textRef = createRef();
-  const { currentUser } = useAuth();
+  const { currentUser, getToken } = useAuth();
   const [ws, setWs] = useState(null);
   const [messages, setMessages] = useState([]);
   const [info, setInfo] = useState("");
@@ -38,15 +38,24 @@ function ChatRoom() {
     };
   }, [ws, messages]);
 
-  const handleJoinChat = (e) => {
+  const handleJoinChat = async (e) => {
     e.preventDefault();
+
+    let token = "";
+    try {
+      token = await getToken();
+    } catch (error) {
+      console.error(error);
+    }
 
     if (groupIdRef.current.value !== "") {
       let ws = new WebSocket(
         WEBSOCKET_BASEURL +
           groupIdRef.current.value +
           "?email=" +
-          currentUser.email
+          currentUser.email +
+          "&token=" +
+          token
       );
 
       ws.onopen = () => {
@@ -81,10 +90,7 @@ function ChatRoom() {
       className="d-flex flex-column align-items-center"
       style={{ maxHeight: "100vh", minWidth: "90vw" }}
     >
-      <Card
-        className="mt-3"
-        style={{ maxHeight: "fit-content"}}
-      >
+      <Card className="mt-3" style={{ maxHeight: "fit-content" }}>
         <Card.Body>
           <h2 className="text-center mb-4">Start/Join Chat</h2>
           {info && <Alert variant="success">{info}</Alert>}
@@ -104,7 +110,7 @@ function ChatRoom() {
           <div>
             <h2 className="text-center mb-4">Your Chat</h2>
             <div
-              style={{ maxHeight: "40vh", minWidth: "90vw"}}
+              style={{ maxHeight: "40vh", minWidth: "90vw" }}
               className="overflow-auto"
             >
               {messages.map((m, i) => {

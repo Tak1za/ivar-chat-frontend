@@ -29,6 +29,13 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
+  function getToken() {
+    if (currentUser) {
+      return currentUser.getIdToken(false);
+    }
+    return "";
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -45,6 +52,7 @@ export function AuthProvider({ children }) {
     loginWithGoogle,
     logout,
     resetPassword,
+    getToken,
   };
   return (
     <AuthContext.Provider value={value}>
