@@ -7,10 +7,12 @@ import Login from "./components/Login/Login";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ChatRoom from "./components/ChatRoom/ChatRoom";
+import Navigation from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <AuthProvider>
+      <Navigation />
       <Switch>
         <PrivateRoute exact path="/" component={Home} />
         <PrivateRoute path="/chatroom" component={ChatRoom} />
