@@ -35,7 +35,7 @@ function Signup() {
     <>
       <Container
         className="d-flex align-items-center justify-content-center"
-        style={{ minHeight: "90vh" }}
+        style={{ minHeight: "100vh", maxHeight: "100vh" }}
       >
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
