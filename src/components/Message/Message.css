@@ -1,6 +1,27 @@
-.message {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: black;
-    max-width: fit-content;
+.MyMessage {
+  border-radius: 15px;
+  max-width: fit-content;
+  background-color: #19223a;
+  color: white;
+  -webkit-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.46);
+}
+
+.OtherMessage {
+  border-radius: 15px;
+  max-width: fit-content;
+  color: black;
+  background-color: white;
+  -webkit-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.46);
+  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.46);
+}
+
+.TextMessage {
+  padding: 10px;
+}
+
+.TextMessageSender {
+  padding: 5px 10px 0px 10px;
 }
