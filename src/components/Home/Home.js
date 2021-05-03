@@ -22,7 +22,6 @@ function Home() {
     const startWebSocketConnection = async () => {
       let token = await getToken().catch((err) => console.error(err));
 
-      console.log(token);
       let conn = new WebSocket(
         WEBSOCKET_BASEURL +
           groupId +
@@ -40,34 +39,37 @@ function Home() {
       conn.onclose = () => {
         console.log("connection closed");
       };
+
+      return () => {
+        conn.close();
+      };
     };
 
     if (groupId) {
-      console.log(groupId);
+      console.log("starting websocket for group: ", groupId);
       startWebSocketConnection();
     }
   }, [currentUser, getToken, groupId]);
 
   useEffect(() => {
     if (!ws) return;
+    console.log("ws exists");
     ws.onmessage = (entry) => {
+      console.log("entry: ", entry);
       let message = JSON.parse(entry.data);
       setMessages(messages.concat(message));
     };
     console.log("added on message listener");
   }, [ws, messages]);
 
-  const handleKeyPress = async (e) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      if (!ws) return;
-      let message = {
-        data: textRef.current.value,
-        groupId: 123,
-      };
-      console.log(message);
-      ws.send(JSON.stringify(message));
-      textRef.current.value = "";
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let message = {
+      data: textRef.current.value,
+      groupId: groupId,
+    };
+    ws.send(JSON.stringify(message));
+    textRef.current.value = "";
   };
 
   return (
@@ -78,7 +80,7 @@ function Home() {
         })}
         <AlwaysScrollToBottom />
       </div>
-      <Form className="w-100 InputForm">
+      <Form className="w-100 InputForm" onSubmit={handleSubmit}>
         <Form.Row>
           <Col sm={10}>
             <Form.Control
@@ -87,12 +89,11 @@ function Home() {
               placeholder="Enter your message here"
               className="InputMessage"
               ref={textRef}
-              onKeyPress={handleKeyPress}
               required
             />
           </Col>
           <Col sm={2} className="p-2 text-center">
-            <Button onKeyPress={handleKeyPress}>Send</Button>
+            <Button type="submit">Send</Button>
           </Col>
         </Form.Row>
       </Form>
