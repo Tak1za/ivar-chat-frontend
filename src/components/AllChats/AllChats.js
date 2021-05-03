@@ -1,68 +1,44 @@
-import React from "react";
+import "./AllChats.css";
+import React, { useState } from "react";
 import { Nav, Accordion, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "./AllChats.css";
 
 function AllChats() {
+  const [allChats] = useState(["id1", "id2", "id3"]);
+
   return (
     <Nav
       defaultActiveKey="/home"
-      className="flex-column justify-content-start align-items-center"
-      style={{ maxHeight: "100vh", minWidth: "25vw", maxWidth: "25vw" }}
+      className="flex-column flex-nowrap justify-content-start align-items-center w-25"
+      style={{ maxHeight: "100vh" }}
     >
-      <Nav.Link
-        as={Link}
-        to="/"
-        style={{ fontFamily: "Zen Dots", color: "black", fontSize: "2em",  textAlign: "center"}}
-      >
+      <Nav.Link as={Link} to="/" className="NavbarHeader text-center">
         ivar
       </Nav.Link>
-      <Accordion defaultActiveKey="0" className="w-100">
+      <Accordion defaultActiveKey="0" className="w-100 text-center">
         <Card style={{ border: "none" }}>
-          <Card.Header className="card-header">
+          <Card.Header className="CardHeader">
             <Accordion.Toggle
               as={Button}
               variant="link"
               eventKey="0"
-              className="navbar-accordion"
+              className="NavbarAccordion text-break"
             >
               Active Conversations
               <i className="fas fa-chevron-down p-2" />
             </Accordion.Toggle>
           </Card.Header>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body className="text-center navbar-card">
-              Hello! I'm the body
-            </Card.Body>
-          </Accordion.Collapse>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body className="text-center navbar-card">
-              Hello! I'm the body
-            </Card.Body>
-          </Accordion.Collapse>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body className="text-center navbar-card">
-              Hello! I'm the body
-            </Card.Body>
-          </Accordion.Collapse>
-        </Card>
-        <Card style={{ border: "none" }}>
-          <Card.Header className="card-header">
-            <Accordion.Toggle
-              as={Button}
-              variant="link"
-              eventKey="1"
-              className="navbar-accordion"
-            >
-              Archived Conversations
-              <i className="fas fa-chevron-down p-2" />
-            </Accordion.Toggle>
-          </Card.Header>
-          <Accordion.Collapse eventKey="1">
-            <Card.Body className="text-center">
-              Hello! I'm another body
-            </Card.Body>
-          </Accordion.Collapse>
+          {allChats.map((groupId, i) => {
+            return (
+              <Accordion.Collapse eventKey="0" key={i}>
+                <Card.Body className="text-center NavbarCard">
+                  <Button variant="link" as={Link} to={`/?id=${groupId}`}>
+                    {groupId}
+                  </Button>
+                </Card.Body>
+              </Accordion.Collapse>
+            );
+          })}
         </Card>
       </Accordion>
     </Nav>

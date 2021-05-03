@@ -1,20 +1,26 @@
-.card-header {
-  background-color: white;
-  border: inherit;
+.NavbarHeader {
+    font-family: "Zen Dots" !important;
+    color: black !important;
+    font-size: 2em !important;
 }
 
-.navbar-accordion {
-  background-color: white;
-  border: none;
-  color: black;
-  font-weight: bold;
+.CardHeader {
+  background-color: white !important;
+  border: inherit !important;
 }
 
-.navbar-accordion:hover {
-    text-decoration: none;
-    color: black;
-  }
+.NavbarAccordion {
+  background-color: white !important;
+  border: none !important;
+  color: black !important;
+  font-weight: bold !important;
+}
 
-.navbar-card {
-    border-radius: 20px;
+.NavbarAccordion:hover {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.NavbarCard {
+  border-radius: 20px !important;
 }

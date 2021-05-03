@@ -88,7 +88,12 @@ function ChatRoom() {
   return (
     <Container
       className="d-flex flex-column align-items-center"
-      style={{ maxHeight: "100vh", minWidth: "90vw" }}
+      style={{
+        maxHeight: "100vh",
+        minHeight: "100vh",
+        minWidth: "70vw",
+        maxWidth: "70vw",
+      }}
     >
       <Card className="mt-3" style={{ maxHeight: "fit-content" }}>
         <Card.Body>
@@ -105,12 +110,17 @@ function ChatRoom() {
           </Form>
         </Card.Body>
       </Card>
-      <Card className="mt-3" style={{ minHeight: "65vh" }}>
-        <Card.Body className="d-flex flex-column justify-content-between w-100">
+      <Card className="mt-3" style={{ minHeight: "65vh", maxHeight: "65vh" }}>
+        <Card.Body className="d-flex flex-column justify-content-between w-100 h-100">
           <div>
             <h2 className="text-center mb-4">Your Chat</h2>
             <div
-              style={{ maxHeight: "40vh", minWidth: "90vw" }}
+              style={{
+                maxHeight: "40vh",
+                minHeight: "40vh",
+                minWidth: "70vw",
+                maxWidth: "70vw",
+              }}
               className="overflow-auto"
             >
               {messages.map((m, i) => {
@@ -119,7 +129,11 @@ function ChatRoom() {
               <AlwaysScrollToBottom />
             </div>
           </div>
-          <Form onSubmit={handleSendText} className="mt-2">
+          <Form
+            onSubmit={handleSendText}
+            className="mt-2"
+            style={{ minWidth: "70vw", maxWidth: "70vw" }}
+          >
             <Form.Group as={Row}>
               <Col sm="11" className="mt-4">
                 <Form.Control
@@ -130,7 +144,7 @@ function ChatRoom() {
                 />
               </Col>
               <Col sm="1" className="mt-4">
-                <Button type="submit" variant="primary" className="w-100">
+                <Button type="submit" variant="primary">
                   Send
                 </Button>
               </Col>

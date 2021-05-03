@@ -1,0 +1,19 @@
+.ChatContainer {
+  background-color: #f2f5fa;
+  border-radius: 20px;
+  min-height: 93vh;
+  max-height: 93vh;
+  padding: 20px;
+}
+
+.InputMessage {
+  border-style: solid !important;
+  border-radius: 25px !important;
+  padding: 15px !important;
+}
+
+@media (max-height: 400px) {
+  .InputForm {
+    display: none;
+  }
+}
