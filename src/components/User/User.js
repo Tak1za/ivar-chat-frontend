@@ -12,7 +12,7 @@ function User({ name, email, ...rest }) {
       return console.error(err);
     });
 
-    addFriend(token)
+    addFriend(token, email)
       .then(console.log("done"))
       .catch((err) => console.error(err));
     setSelected(!selected);

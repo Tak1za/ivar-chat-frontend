@@ -16,10 +16,14 @@ export async function getUsers(token) {
   });
 }
 
-export async function addFriend(token) {
-  return axios.get(BACKEND_BASEURL + "users/friends/add", {
-    headers: {
-      Authorization: token,
-    },
-  });
+export async function addFriend(token, email) {
+  return axios.post(
+    BACKEND_BASEURL + "users/friends/add",
+    { email: email },
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
 }
