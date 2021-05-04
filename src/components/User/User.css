@@ -1,0 +1,8 @@
+.AddUserButton {
+  font-size: 1.3em;
+}
+
+.AddUserButtonSelected {
+  font-size: 1.3em;
+  background-color: green;
+}

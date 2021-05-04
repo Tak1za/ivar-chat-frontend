@@ -9,6 +9,7 @@ import {
   FIREBASE_STORAGEBUCKET,
 } from "../const";
 import "firebase/auth";
+import "firebase/firestore";
 
 const app = firebase.initializeApp({
   apiKey: FIREBASE_APIKEY,
@@ -21,4 +22,5 @@ const app = firebase.initializeApp({
 });
 
 export const auth = app.auth();
+export const store = firebase.firestore();
 export default app;

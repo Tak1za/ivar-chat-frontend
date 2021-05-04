@@ -6,7 +6,6 @@ import { useAuth } from "./contexts/AuthContext";
 import Login from "./components/Login/Login";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
-import ChatRoom from "./components/ChatRoom/ChatRoom";
 import AllChats from "./components/AllChats/AllChats";
 import { Container } from "react-bootstrap";
 import Auth from "./components/Logout/Logout";
@@ -20,7 +19,6 @@ function App() {
         {currentUser ? <Auth /> : null}
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute path="/chatroom" component={ChatRoom} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/forgot-password" component={ForgotPassword} />
