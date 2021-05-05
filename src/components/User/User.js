@@ -3,7 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { addFriend } from "../../utils/backend";
 import "./User.css";
 
-function User({ name, email, ...rest }) {
+function User({ name, email, friends, ...rest }) {
   const [selected, setSelected] = useState(false);
   const { getToken } = useAuth();
 
@@ -17,15 +17,20 @@ function User({ name, email, ...rest }) {
       .catch((err) => console.error(err));
     setSelected(!selected);
   };
+
   return (
     <div className="d-flex justify-content-between align-items-center">
-      <div>{`${name} (${email})`}</div>
-      <i
-        className={`far fa-plus-square ${
-          selected ? "AddUserButtonSelected" : "AddUserButton"
-        }`}
-        onClick={handleAddButtonClicked}
-      />
+      {!friends.map((f) => f.email).includes(email) ? (
+        <>
+          <div>{`${name} (${email})`}</div>
+          <i
+            className={`far fa-plus-square ${
+              selected ? "AddUserButtonSelected" : "AddUserButton"
+            }`}
+            onClick={handleAddButtonClicked}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

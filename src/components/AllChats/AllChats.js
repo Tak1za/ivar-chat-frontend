@@ -1,15 +1,33 @@
 import "./AllChats.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Accordion, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Menu from "../Menu/Menu";
+import { useAuth } from "../../contexts/AuthContext";
+import { getMyFriends } from "../../utils/backend";
 
 function AllChats() {
-  const [allChats] = useState(["id1", "id2", "id3"]);
+  const [allChats, setAllChats] = useState(["id1", "id2", "id3"]);
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    async function getAllChats() {
+      await getToken()
+        .then((t) => getMyFriends(t))
+        .then((res) => {
+          setAllChats(res.data.data);
+        })
+        .catch((err) => {
+          return console.error(err);
+        });
+    }
+
+    getAllChats();
+  }, [getToken]);
 
   return (
     <Nav
-      defaultActiveKey="/home"
+      defaultActiveKey="/"
       className="flex-column flex-nowrap justify-content-start align-items-center w-25"
       style={{ maxHeight: "100vh" }}
     >
@@ -32,12 +50,12 @@ function AllChats() {
               <i className="fas fa-chevron-down p-2" />
             </Accordion.Toggle>
           </Card.Header>
-          {allChats.map((groupId, i) => {
+          {allChats.map((chat) => {
             return (
-              <Accordion.Collapse eventKey="0" key={i}>
+              <Accordion.Collapse key={chat.email} eventKey="0" >
                 <Card.Body className="text-center NavbarCard">
-                  <Button variant="link" as={Link} to={`/?id=${groupId}`}>
-                    {groupId}
+                  <Button variant="link" as={Link} to={`/?id=${chat.chatId}`}>
+                    {chat.name}
                   </Button>
                 </Card.Body>
               </Accordion.Collapse>

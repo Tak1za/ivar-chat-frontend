@@ -27,3 +27,11 @@ export async function addFriend(token, email) {
     }
   );
 }
+
+export async function getMyFriends(token) {
+  return axios.get(BACKEND_BASEURL + "users/friends", {
+    headers: {
+      Authorization: token,
+    },
+  });
+}
