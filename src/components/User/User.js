@@ -20,7 +20,7 @@ function User({ name, email, friends, ...rest }) {
 
   return (
     <div className="d-flex justify-content-between align-items-center">
-      {!friends.map((f) => f.email).includes(email) ? (
+      {!friends || !friends.map((f) => f.email).includes(email) ? (
         <>
           <div>{`${name} (${email})`}</div>
           <i

@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { getMyFriends } from "../../utils/backend";
 
 function AllChats() {
-  const [allChats, setAllChats] = useState(["id1", "id2", "id3"]);
+  const [allChats, setAllChats] = useState([]);
   const { getToken } = useAuth();
 
   useEffect(() => {
