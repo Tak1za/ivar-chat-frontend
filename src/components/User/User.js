@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { addFriend } from "../../utils/backend";
+import { sendFriendRequest } from "../../utils/backend";
 import "./User.css";
 
-function User({ name, email, friends, ...rest }) {
+function User({ name, email, id, friends, ...rest }) {
   const [selected, setSelected] = useState(false);
   const { getToken } = useAuth();
 
@@ -12,9 +12,9 @@ function User({ name, email, friends, ...rest }) {
       return console.error(err);
     });
 
-    addFriend(token, email)
+    sendFriendRequest(token, id)
       .then(console.log("done"))
-      .catch((err) => console.error(err));
+      .catch(err => console.error(err));
     setSelected(!selected);
   };
 

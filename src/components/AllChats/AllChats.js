@@ -50,7 +50,7 @@ function AllChats() {
               <i className="fas fa-chevron-down p-2" />
             </Accordion.Toggle>
           </Card.Header>
-          {allChats.map((chat) => {
+          {allChats && allChats.map((chat) => {
             return (
               <Accordion.Collapse key={chat.email} eventKey="0" >
                 <Card.Body className="text-center NavbarCard">

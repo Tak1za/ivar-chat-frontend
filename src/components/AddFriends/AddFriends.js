@@ -47,7 +47,8 @@ function AddFriends(props) {
             <User
               name={p.name}
               email={p.email}
-              key={p.email}
+              key={p.id}
+              id={p.id}
               friends={friends}
             />
           );
